@@ -12,9 +12,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     private String password;
+
+    public User(String fullName , String username , String password){
+        setId(id);
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
 }
