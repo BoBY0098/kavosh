@@ -1,9 +1,8 @@
 package com.example.kavosh.controller;
 
-import com.example.kavosh.service.JwtService;
-import com.example.kavosh.service.UserService;
 import com.example.kavosh.entity.UserReq;
 import com.example.kavosh.entity.UserRes;
+import com.example.kavosh.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
-
-    private final JwtService jwtService;
 
     @GetMapping(value = "/getAll" ,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserRes>> getAllUsers(){
