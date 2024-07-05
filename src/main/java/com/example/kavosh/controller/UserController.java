@@ -1,6 +1,6 @@
 package com.example.kavosh.controller;
 
-import com.example.kavosh.component.JwtUtil;
+import com.example.kavosh.service.JwtService;
 import com.example.kavosh.service.UserService;
 import com.example.kavosh.entity.UserReq;
 import com.example.kavosh.entity.UserRes;
@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/preauth/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService service;
+
+    private final JwtService jwtService;
 
     @GetMapping(value = "/getAll" ,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserRes>> getAllUsers(){
@@ -28,12 +30,5 @@ public class UserController {
     public ResponseEntity<String> saveUser(@RequestBody UserReq userReq){
         service.saveUser(userReq);
         return ResponseEntity.ok("User Created Successfully");
-    }
-
-    @PostMapping(value = "/login" , consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> generateToken(@RequestParam String username , @RequestParam String password) {
-        service.loginUser(username , password);
-        String token = JwtUtil.generateToken(username);
-        return ResponseEntity.ok(token);
     }
 }
